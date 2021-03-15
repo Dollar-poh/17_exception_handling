@@ -1,5 +1,6 @@
 from Raf_account_class import Account
 from Raf_Child_Bank_Account_Class import ChildBankAccount
+from exceptions import InsufficientFundsException
 from Raf_savings_account_class import SavingsAccount
 from datetime import date
 
@@ -9,6 +10,7 @@ Sanele_account.first_name = "Lily"
 print(Sanele_account.first_name)
 print(Sanele_account.email)
 
+Sanele_account.withdraw(20000000)
 
 Raf_account = ChildBankAccount("Raf", "Atkinson", 150000)
 print(Raf_account.get_balance())

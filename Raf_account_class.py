@@ -1,3 +1,5 @@
+from exceptions import InsufficientFundsException
+
 class Account:
     numCreated = 0
     def __init__(self,first_name, last_name, current):
@@ -25,8 +27,29 @@ class Account:
         return
 
     def withdraw(self, amount):
-        self.balance -= amount
-        return
+        try:
+        #     account.withdraw(5000)
+        # except InsufficientFundsException:
+        #     print(f'Insufficient funds for {account.name} to withdraw 5000')
+
+            if self.balance - amount < 0:
+                raise InsufficientFundsException
+                pass
+            else:
+                self.balance -= amount
+
+            print(f'{self.first_name} has withdrawn £{amount}')
+            self.make_charges()
+
+        except InsufficientFundsException:
+            print(f'Insufficient funds for {self.first_name} to withdraw {amount}')
+
+
+    def make_charges(self):
+        # apply overdraft charges if below zero
+        if self.balance < 0:
+            self.balance -= 20
+            print(f'{self.first_name} is overdrawn and have been charged £20')
 
     def get_balance(self):
         return self.balance
